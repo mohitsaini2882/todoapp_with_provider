@@ -7,7 +7,7 @@ import 'utils/routes.dart';
 
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  //await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      initialRoute: Routes.signUpScreen,
+      initialRoute: "slkjf",
       onGenerateRoute: Routes.generateRoute,
     );
   }

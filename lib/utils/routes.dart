@@ -4,6 +4,8 @@ import 'package:todoapp_with_provider/view/home_screen.dart';
 import 'package:todoapp_with_provider/view/login_screen.dart';
 import 'package:todoapp_with_provider/view/signup_screen.dart';
 import 'package:todoapp_with_provider/view/splash_screen.dart';
+
+import '../streams/stream_example_screen.dart';
 class Routes{
  static const String splashScreen = "splashScreen";
  static const String homeScreen = "homeScreen";
@@ -19,7 +21,8 @@ class Routes{
       case signUpScreen:  return  MaterialPageRoute(builder: (_)=>const SignUpScreen());
       case addTodoScreen:  return  MaterialPageRoute(builder: (_)=>const AddTodoScreen());
       default:
-        return _errorRoute();
+        return MaterialPageRoute(builder: (_)=> StreamExample());
+        //return _errorRoute();
 
     }
   }

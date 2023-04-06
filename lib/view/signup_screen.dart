@@ -12,16 +12,50 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  List<DropdownMenuItem<dynamic>> items = [];
+
+  List<String> list = ["Option 1", "Option 2", "Option 3"];
+
+  int gIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    for (String element in list) {
+      DropdownMenuItem item = DropdownMenuItem(
+        value: list.indexOf(element),
+        child: Text(element),
+      );
+      items.add(item);
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text("SignUp"),
+        actions: [
+          PopupMenuButton(
+            onSelected: (value){
+              print("Datatype : ${value.runtimeType} and value : $value");
+            },
+            itemBuilder: (context){
+              List<PopupMenuEntry<dynamic>> list = [
+                PopupMenuItem(child: Text("Item 1"),value: 0,),
+                PopupMenuItem(child: Text("Item 2"),value: 1,),
+                PopupMenuItem(child: Text("Item 3"),value: 2,),
+              ];
+              return list;
+            },
+          )
+
+        ],
       ),
       body: SingleChildScrollView(
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             FocusManager.instance.primaryFocus!.unfocus();
           },
           child: Container(
@@ -70,6 +104,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     ),
                   ),
+
+                  ///----- drop down button ----
+                  DropdownButton(
+                      hint: Text(list[gIndex]),
+                      items: items,
+                      onChanged: (value) {
+                        setState(() {
+                          gIndex = value;
+                        });
+                      })
                 ],
               ),
             ),
@@ -86,9 +130,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // ignore: non_constant_identifier_names
   ProfileWidget({required BuildContext context}) {
     return InkWell(
-      onTap: ()async{
+      onTap: () async {
         final ImagePicker picker = ImagePicker();
-        final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+        final XFile? image =
+            await picker.pickImage(source: ImageSource.gallery);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 22),
